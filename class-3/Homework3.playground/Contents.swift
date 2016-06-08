@@ -15,9 +15,27 @@ protocol ObjectStore {
     associatedtype Object: Identity
     func add(object: Object)
     func remove(object: Object)
-    func objectAtIndex() -> Object
+    func objectAtIndex(index: Int) -> Object
     func count() -> Int
     func allObjects() -> [Object]
+}
+
+extension ObjectStore {
+    func add(object: Object){
+        //
+    }
+    func remove(object: Object) {
+        //
+    }
+    func objectAtIndex(Index: Int) -> Object {
+        //
+    }
+    func count() -> Int {
+        //
+    }
+    func allObjects() -> [Object] {
+        //
+    }
 }
 
 class ToDo: Identity {
