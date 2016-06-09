@@ -31,9 +31,11 @@ class NewItemViewController: UIViewController
     @IBAction func saveButtonSelected(sender: AnyObject)
     {
         guard let navigationController = self.navigationController else { fatalError("Where did Navigation Controller go? Error origin: \(#function)") }
-        guard let description = self.todoTextField.text else { return }
         
-        // Missing model.
+        if let item = description.self {
+            let item = ToDo(description: description, dateCreated: dateCreated, status: status, priority: priority, id: id)
+            Store.shared.add(item)
+        }
         
         navigationController.popViewControllerAnimated(true)
     }

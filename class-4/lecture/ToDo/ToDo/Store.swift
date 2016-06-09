@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Store: ObjectStore {
     static let shared = Store()
     private init() {}

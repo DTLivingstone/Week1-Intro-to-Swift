@@ -34,8 +34,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("todoCell", forIndexPath: indexPath)
         
-        // Missing model.
-        // Missing setup.
+//        In HomeViewController find `configureCell:` implement it by first getting an object from `Store` for `indexPath.row` and set the `cell.textLabel.text` to item.itemDescription
+        let task = Store.shared.allObjects()[indexPath.row]
+        cell.textLabel?.text = "\(task.description)"
         
         return cell
     }
@@ -44,7 +45,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 0
+//        In HomeViewController find `tableView:numberOfRowsInSection:` function and return using `Store` return number of objects it should display
+        return Store.shared.count()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -63,7 +65,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     {
         if editingStyle == .Delete {
             
-            // Missing model.
+//            In HomeViewController find `tableView:commitEditingStyle…` Use `Store` to remove object for `indexPath.row`
+            
+            let task = Store.shared.allObjects()[indexPath.row]
+            Store.shared.remove(task)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         }

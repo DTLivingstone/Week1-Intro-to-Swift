@@ -41,6 +41,8 @@ extension ViewController: UITableViewDataSource
         // Missing model. TODO
         // Missing setup. TODO
         
+        
+        
         let student = Store.shared.allStudents()[indexPath.row]
         cell.textLabel?.text = "\(student.firstName) \(student.lastName)"
         
@@ -51,7 +53,7 @@ extension ViewController: UITableViewDataSource
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 0
+        return Store.shared.count()
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
