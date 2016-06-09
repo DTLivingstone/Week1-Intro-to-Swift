@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+protocol ObjectStoreProtocol {
+    associatedtype Object: Identity
+    func add(object: Object)
+    func remove(object: Object)
+    func removeAllObjects()
+    func count() -> Int
+    func allStudents() -> [Object]
+}
