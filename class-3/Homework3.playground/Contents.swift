@@ -21,6 +21,7 @@ protocol ObjectStore: class {
     func objectAtIndex(index: Int) -> Object
     func count() -> Int
     func allObjects() -> [Object]
+    func printDiagnostics()
 }
 
 extension ObjectStore {
@@ -40,6 +41,11 @@ extension ObjectStore {
     }
     func allObjects() -> [Object] {
         return self.toDoList
+    }
+    func printDiagnostics() {
+        for task in Store.shared.allObjects() {
+            print("id: \(task.id) description: \(task.description), dateCreated: \(task.dateCreated), status: \(task.status), priority: \(task.priority)")
+        }
     }
 }
 
@@ -70,9 +76,29 @@ class ToDo: Identity {
 
 let taskA = ToDo(description: "Wash dishes", dateCreated: "6/8/16", status: "In progress", priority: 2)
 let taskB = ToDo(description: "Finish taxes", dateCreated: "3/4/15", status: "Complete", priority: 1)
+let taskC = ToDo(description: "Mow lawn", dateCreated: "4/4/16", status: "Canceled", priority: 8)
 
+
+// add
 
 Store.shared.add(taskA)
 Store.shared.add(taskB)
+Store.shared.add(taskC)
+Store.shared.printDiagnostics()
 
-let x = Store.shared.allObjects()
+// remove
+
+Store.shared.remove(taskC)
+Store.shared.printDiagnostics()
+
+// objectAtIndex
+
+Store.shared.objectAtIndex(1).description
+
+// count
+
+Store.shared.count()
+
+// allObjects
+
+Store.shared.allObjects()
