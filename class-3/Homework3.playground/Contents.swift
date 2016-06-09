@@ -1,16 +1,30 @@
-// Declare Identity protocol with id function
-// Declare a ToDo class that conforms to Identity protocol… Define your own model scheme (variable it contains, etc)
-// Define ObjectStore protocol with these functions: add:, remove:, objectAtIndex:, count, allObjects.
-// Extend ObjectStore protocol to provide basic implementation for functions
-
-// Create Store singleton that will conform to ObjectStore protocol and implement requirements
-// Demonstrate adding / removing of ToDo items.
-
 import Foundation
+
+// Declare Identity protocol with id function
 
 protocol Identity {
     var id: String { get set }
 }
+
+// Declare a ToDo class that conforms to Identity protocol… Define your own model scheme (variable it contains, etc)
+
+class ToDo: Identity {
+    let description: String
+    let dateCreated: String
+    let status: String
+    let priority: Int
+    var id: String
+    
+    init(description: String, dateCreated: String, status: String, priority: Int) {
+        self.description = description
+        self.dateCreated = dateCreated
+        self.status = status
+        self.priority = priority
+        self.id = NSUUID().UUIDString
+    }
+}
+
+// Define ObjectStore protocol with these functions: add:, remove:, objectAtIndex:, count, allObjects.
 
 protocol ObjectStore: class {
     associatedtype Object: Identity
@@ -23,6 +37,8 @@ protocol ObjectStore: class {
     func allObjects() -> [Object]
     func printDiagnostics()
 }
+
+// Extend ObjectStore protocol to provide basic implementation for functions
 
 extension ObjectStore {
     func add(object: Object) {
@@ -49,6 +65,8 @@ extension ObjectStore {
     }
 }
 
+// Create Store singleton that will conform to ObjectStore protocol and implement requirements
+
 class Store: ObjectStore {
     static let shared = Store()
     private init() {}
@@ -58,27 +76,11 @@ class Store: ObjectStore {
     var toDoList = [Object]()
 }
 
-class ToDo: Identity {
-    let description: String
-    let dateCreated: String
-    let status: String
-    let priority: Int
-    var id: String
-    
-    init(description: String, dateCreated: String, status: String, priority: Int) {
-        self.description = description
-        self.dateCreated = dateCreated
-        self.status = status
-        self.priority = priority
-        self.id = NSUUID().UUIDString
-    }
-}
-
 let taskA = ToDo(description: "Wash dishes", dateCreated: "6/8/16", status: "In progress", priority: 2)
 let taskB = ToDo(description: "Finish taxes", dateCreated: "3/4/15", status: "Complete", priority: 1)
 let taskC = ToDo(description: "Mow lawn", dateCreated: "4/4/16", status: "Canceled", priority: 8)
 
-
+// Demonstrate adding / removing of ToDo items
 // add
 
 Store.shared.add(taskA)
