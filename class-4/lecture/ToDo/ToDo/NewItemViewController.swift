@@ -32,8 +32,10 @@ class NewItemViewController: UIViewController
     {
         guard let navigationController = self.navigationController else { fatalError("Where did Navigation Controller go? Error origin: \(#function)") }
         
-        if let item = description.self {
-            let item = ToDo(description: description, dateCreated: dateCreated, status: status, priority: priority, id: id)
+//        In NewItemViewController find `saveButtonSelected:` function and create item using description variable. Add the item to the `Store`
+        
+        if let description = self.todoTextField.text {
+            let item = ToDo(description: description, dateCreated: "", status: "", priority: 0)
             Store.shared.add(item)
         }
         

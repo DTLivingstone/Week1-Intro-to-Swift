@@ -43,4 +43,10 @@ extension ObjectStore {
             print("id: \(task.id) description: \(task.description), dateCreated: \(task.dateCreated), status: \(task.status), priority: \(task.priority)")
         }
     }
+    
+//    Add save function to `ObjectStoreProtocol`. Provide default implementation for simply writing array of objects to the filesystem
+    
+    func save() {
+        
+    }
 }

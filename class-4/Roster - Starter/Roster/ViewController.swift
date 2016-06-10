@@ -38,11 +38,6 @@ extension ViewController: UITableViewDataSource
     {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("studentCell", forIndexPath: indexPath)
         
-        // Missing model. TODO
-        // Missing setup. TODO
-        
-        
-        
         let student = Store.shared.allStudents()[indexPath.row]
         cell.textLabel?.text = "\(student.firstName) \(student.lastName)"
         
